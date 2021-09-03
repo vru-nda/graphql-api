@@ -15,6 +15,7 @@ type Post {
 type User {
     _id: ID!
     name: String!
+    status: String!
     email: String!
     password: String
     posts: [Post!]!
@@ -45,10 +46,16 @@ input PostInputData {
 type RootQuery{
     login(email: String!, password: String!): AuthData!
     posts(page: Int): PostData!
+    post(postId: ID!): Post!
+    user:User!
 }
+
 type RootMutation {
     createUser(userInput: UserInputData ):User!
     createPost(postInput: PostInputData): Post!
+    updatePost(postId: ID!, postInput: PostInputData): Post!
+    deletePost(postId: ID!): Boolean
+    updateStatus(status:String!): User!
 }
 
  schema {
